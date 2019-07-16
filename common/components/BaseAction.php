@@ -47,28 +47,6 @@ trait BaseAction
         return $this->analyErr($model->getFirstErrors());
     }
 
-    /**
-     * 重载配置
-     *
-     * @param $merchant_id
-     */
-    public function afreshLoad($merchant_id)
-    {
-        // 微信配置 具体可参考EasyWechat
-        Yii::$app->params['wechatConfig'] = [];
-        // 微信支付配置 具体可参考EasyWechat
-        Yii::$app->params['wechatPaymentConfig'] = [];
-        // 微信小程序配置 具体可参考EasyWechat
-        Yii::$app->params['wechatMiniProgramConfig'] = [];
-        // 微信开放平台第三方平台配置 具体可参考EasyWechat
-        Yii::$app->params['wechatOpenPlatformConfig'] = [];
-        // 微信企业微信配置 具体可参考EasyWechat
-        Yii::$app->params['wechatWorkConfig'] = [];
-        // 微信企业微信开放平台 具体可参考EasyWechat
-        Yii::$app->params['wechatOpenWorkConfig'] = [];
-
-        (new Init())->afreshLoad($merchant_id);
-    }
 
     /**
      * 解析错误
