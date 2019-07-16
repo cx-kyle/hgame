@@ -14,7 +14,6 @@ echo "<?php\n";
 
 use common\helpers\Html;
 use common\helpers\Url;
-use common\helpers\Html;
 use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 <?= $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
 

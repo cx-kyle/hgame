@@ -31,14 +31,15 @@ namespace <?= StringHelper::dirname(ltrim($generator->controllerClass, '\\')) ?>
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use common\models\common\SearchModel;
 use <?= ltrim($generator->modelClass, '\\') ?>;
 use common\components\Curd;
-use <?= ltrim($generator->baseControllerClass, '\\') ?>;
+use backend\controllers\BaseController;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
  */
-class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
+class <?= $controllerClass ?> extends BaseController
 {
     use Curd;
 
@@ -53,22 +54,22 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     */
     public function actionIndex()
     {
-<?php if (!empty($generator->searchModelClass)): ?>
-        $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
+        $searchModel = new SearchModel([
+            'model' => $this->modelClass,
+            'scenario' => 'default',
+            'partialMatchAttributes' => [], // 模糊查询
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ],
+            'pageSize' => $this->pageSize
+        ]);
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-<?php else: ?>
-        $dataProvider = new ActiveDataProvider([
-            'query' => <?= $modelClass ?>::find(),
-        ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-<?php endif; ?>
     }
 }

@@ -7,7 +7,7 @@ use yii\helpers\BaseHtml;
 use common\enums\StatusEnum;
 use common\enums\WhetherEnum;
 use common\enums\EtypeEnum;
-
+use common\enums\NoticeEnum;
 /**
  * Class Html
  * @package common\helpers
@@ -126,6 +126,26 @@ class Html extends BaseHtml
 
         return $listBut[$status] ?? '';
     }
+
+    /**
+     * notice 状态标签
+     */
+
+    public static function noticetype($status=0)
+    {
+        $listBut = [
+            NoticeEnum::ZERO => self::tag('span', '未发送', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            NoticeEnum::SUCCESS => self::tag('span', '发送成功', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+            NoticeEnum::ERROR => self::tag('span', '发送失败', [
+                'class' => "btn btn-danger btn-sm",
+            ]),
+        ];
+        return $listBut[$status] ?? '';
+    } 
 
     /**
      * @param string $text

@@ -180,3 +180,9 @@
 .avatar-btns .btn-group {
     margin-right: 5px;
 }
+
+.tablehidden {
+    height: 100px !important;
+    overflow: auto !important;
+    
+}
