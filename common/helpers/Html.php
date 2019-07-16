@@ -8,6 +8,7 @@ use common\enums\StatusEnum;
 use common\enums\WhetherEnum;
 use common\enums\EtypeEnum;
 use common\enums\NoticeEnum;
+use common\enums\ServerInfoEnum;
 /**
  * Class Html
  * @package common\helpers
@@ -146,6 +147,57 @@ class Html extends BaseHtml
         ];
         return $listBut[$status] ?? '';
     } 
+
+    public static function ServerInfostatus($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::THREE => self::tag('span', '爆满', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '良好', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+            ServerInfoEnum::TWO => self::tag('span', '正常', [
+                'class' => "btn btn-danger btn-sm",
+            ]),
+            ServerInfoEnum::FOUR => self::tag('span', '备服', [
+                'class' => "btn btn-danger btn-sm",
+            ]),
+        ];
+        return $listBut[$status] ?? '';
+    }
+
+    public static function IsNew($status = 0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '老区', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '新区', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+           
+        ];
+        return $listBut[$status] ?? '';
+
+    }
+
+    public static function IsClose($status = 0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '正常', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '维护', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+           
+        ];
+        return $listBut[$status] ?? '';
+
+    }
+
+    
 
     /**
      * @param string $text

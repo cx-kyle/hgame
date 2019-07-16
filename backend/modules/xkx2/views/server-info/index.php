@@ -3,6 +3,7 @@
 use common\helpers\Html;
 use common\helpers\Url;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'tableOptions' => ['class' => 'table table-hover'],
         'columns' => [
             [
@@ -33,20 +35,71 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             'id',
-            'name',
-            'area',
-            'appId',
-            'crossGroup',
-            //'crossCD',
-            'crossRank',
-            'crossChat',
-            'crossFlyUp',
-            'crossFlyUpDate',
-           
-            'isNew',
-            'status',
-            'openTime',
-            'isClose',
+            [
+                'attribute' => 'name',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'area',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'appId',
+                'filter' => false,
+            ],
+            
+            [
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    return  Html::ServerInfostatus($model['status']); 
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status', 
+                ['1' => '良好', '2' => '正常','3' => '爆满','4' => '备服'], [
+                    'prompt' => '全部',
+                    'class' => 'form-control',
+                ]),
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'isNew',
+                'value' => function ($model) {
+                    return  Html::IsNew($model['isNew']); 
+                },
+                'filter' => false,
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'isClose',
+                'value' => function ($model) {
+                    return  Html::IsClose($model['isClose']); 
+                },
+                'filter' => false,
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'openTime',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'crossGroup',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'crossRank',
+                'filter' => false,
+            ], 
+            [
+                'attribute' => 'crossChat',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'crossFlyUp',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'crossFlyUpDate',
+                'filter' => false,
+            ],
             
             [
                 'class' => 'yii\grid\ActionColumn',

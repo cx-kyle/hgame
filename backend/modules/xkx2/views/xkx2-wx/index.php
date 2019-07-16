@@ -45,14 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'sendTime',
             'expireAt',
             'title',
-            //'content:ntext',
-            //'userId:ntext',
-            //'extCondition:ntext',
-            //'excelItems:ntext',
-            //'items:ntext',
-            //'mailCount',
-            //'createdtime',
-            //'sender',
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
