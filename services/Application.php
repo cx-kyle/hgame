@@ -50,7 +50,7 @@ class Application extends Service
         'apiAccessToken' => [
             'class' => 'services\api\AccessTokenService',
             'cache' => false, // 启用缓存到缓存读取用户信息
-            'timeout' => 720, // 缓存过期时间，单位秒
+            'timeout' => 7200, // 缓存过期时间，单位秒
         ],
         /** ------ 系统 ------ **/
         'sys' => 'services\sys\SysService',
@@ -87,11 +87,5 @@ class Application extends Service
             'class' => 'services\common\MailerService',
             'queueSwitch' => false, // 是否丢进队列
         ],
-        /** ------ oauth2 ------ **/
-        'oauth2Server' => 'services\oauth2\ServerService',
-        'oauth2Client' => 'services\oauth2\ClientService',
-        'oauth2AccessToken' => 'services\oauth2\AccessTokenService',
-        'oauth2RefreshToken' => 'services\oauth2\RefreshTokenService',
-        'oauth2AuthorizationCode' => 'services\oauth2\AuthorizationCodeService',
     ];
 }
