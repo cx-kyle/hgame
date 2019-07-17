@@ -63,6 +63,7 @@ class SearchModel extends Model
     private $rules;
     private $scenarios;
 
+
     /**
      * @var string 默认排序
      */
@@ -129,7 +130,12 @@ class SearchModel extends Model
 
         if ($partialMath) {
             $query->andWhere(['like', $attributeName, trim($value)]);
-        } else {
+        } elseif($attributeName == 'server_info.openTime'){
+            list($start_date, $end_date) = explode(' - ', $value);
+            $query->andWhere(['>=',$attributeName, date('Y-m-d H:i:s',strtotime($start_date))]);
+            $query->andWhere(['<',$attributeName, date('Y-m-d H:i:s',strtotime($end_date.' 23:59:59'))]);
+        } 
+        else {
             $query->andWhere($this->conditionTrans($attributeName, $value));
         }
     }
@@ -291,7 +297,6 @@ class SearchModel extends Model
         foreach ($this->attributes as $name => $value) {
             $this->addCondition($query, $name, in_array($name, $this->partialMatchAttributes));
         }
-
         return $dataProvider;
     }
 

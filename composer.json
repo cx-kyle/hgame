@@ -29,6 +29,7 @@
         "kartik-v/yii2-widget-timepicker": "*",
         "kartik-v/yii2-widget-colorinput": "*",
         "kartik-v/yii2-widget-select2": "@dev",
+        "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-date-range": "*",
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
         "2amigos/qrcode-library": "^1.1",
@@ -75,11 +76,7 @@
             "enabled": false
         }
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packagist.laravel-china.org"
-        },
+    "repositories": [   
         {
             "type": "composer",
             "url": "https://asset-packagist.org"

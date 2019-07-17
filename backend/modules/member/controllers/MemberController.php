@@ -91,33 +91,5 @@ class MemberController extends BaseController
         ]);
     }
 
-    /**
-     * 积分/余额变更
-     *
-     * @param $id
-     * @return mixed|string
-     * @throws \yii\base\ExitException
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     */
-    // public function actionRecharge($id)
-    // {
-    //     $rechargeForm = new RechargeForm();
-    //     $member = $this->findModel($id);
-
-    //     // ajax 校验
-    //     $this->activeFormValidate($rechargeForm);
-    //     if ($rechargeForm->load(Yii::$app->request->post())) {
-    //         if (!$rechargeForm->save($member)) {
-    //             return $this->message($this->analyErr($rechargeForm->getFirstErrors()), $this->redirect(['index']), 'error');
-    //         }
-
-    //         return $this->message('充值成功', $this->redirect(['index']));
-    //     }
-
-    //     return $this->renderAjax($this->action->id, [
-    //         'model' => $member,
-    //         'rechargeForm' => $rechargeForm,
-    //     ]);
-    // }
+  
 }

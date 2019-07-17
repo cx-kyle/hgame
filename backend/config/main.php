@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'defaultRoute' => 'main', // 默认控制器
     'bootstrap' => ['log'],
+    'timeZone' => 'Asia/Shanghai',
     'modules' => [
         /** ------ 公用模块 ------ **/
         'common' => [
@@ -34,6 +35,9 @@ return [
         /** ------- 基础模块 ----- */
         'xkx2' => [
             'class' => 'backend\modules\xkx2\Module',
+        ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
         ],
     ],
     'components' => [
