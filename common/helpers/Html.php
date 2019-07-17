@@ -197,6 +197,20 @@ class Html extends BaseHtml
 
     }
 
+    public static function UserMailStatus($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '未读', [
+                'class' => "btn btn-danger btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '已读', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+           
+        ];
+        return $listBut[$status] ?? '';   
+    }
+
     
 
     /**

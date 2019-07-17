@@ -10,8 +10,8 @@ username='root'
 password=''
 # mysql 主机地址
 server='127.0.0.1'
-# 单个数据库 如果要多个例如:rageframe1 rageframe2
-database='rageframe'
+# 单个数据库 如果要多个例如:
+database='backends'
 
 # --------------开始备份-------------- #
 
