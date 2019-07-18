@@ -2,7 +2,7 @@
 
 use common\helpers\Html;
 use common\helpers\Url;
-
+use kartik\grid\GridView;
 
 
 /* @var $this yii\web\View */

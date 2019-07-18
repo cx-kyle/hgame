@@ -1,8 +1,7 @@
 <?php
 
 use common\helpers\Html;
-use yii\grid\GridView;
-use yii\web\View;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,6 +9,21 @@ use yii\web\View;
 $this->title = '用户邮件管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<form action="index" method="get">
+
+    <div class="form-group">
+            <div class="col-sm-2">
+                <input class="form-control" id="query[userId]" name="query[userId]" type="text" placeholder="用户ID"/>
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" id="query[title]" name="query[title]" type="text" placeholder="标题"/>
+            </div>
+    </div>
+    <div class="form-group">
+        <input  type="submit" class="btn btn-primary btn-sm" value="搜索">
+    </div>
+</form>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -25,10 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?=GridView::widget([
     'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
     'tableOptions' => ['class' => 'table table-hover'],
     'columns' => [
         [
-            'class' => 'yii\grid\SerialColumn',
+            'class' => 'yii\grid\DataColumn',
             'visible' => false,
         ],
 
@@ -37,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         ['label' => '用户ID',
             'attribute' => 'userId',
-            'filter' => false,
             'format' => 'raw',
         ],
         ['label' => '类型',

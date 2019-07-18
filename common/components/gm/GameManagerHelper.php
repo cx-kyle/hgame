@@ -33,12 +33,12 @@ class GameManagerHelper extends  Component
     }
 
 
-    public static function getUserMailInfo($serverID,$page,$limit)
+    public static function getUserMailInfo($serverID,$page,$limit,$where)
     {
         $offset = ($page-1) * ($limit);
         $sql ="SELECT id,userId,type,sender,title,content,status,expireAt,redeemedAt,deletedAt,priority
               FROM mail 
-              WHERE '1=1'
+              WHERE $where
               order by id desc
               limit $limit
               offset $offset
@@ -53,10 +53,10 @@ class GameManagerHelper extends  Component
      * 获取总数
      */
 
-    public static function getUserMailCount($serverID)
+    public static function getUserMailCount($serverID,$where)
     {
         
-        $sql ="SELECT COUNT(*) FROM mail";
+        $sql ="SELECT COUNT(*) FROM mail where $where";
 
         $command = self::getDbConnectionByServerId($serverID)->createCommand($sql);
         $result = $command->queryScalar();
