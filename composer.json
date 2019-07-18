@@ -1,15 +1,10 @@
 {
-    "name": "jianyan74/rageframe2",
-    "description": "一个基于Yii2高级框架的快速开发应用引擎",
+    "name": "hgame",
+    "description": "",
     "keywords": ["yii2", "framework", "advanced", "project template", "rageframe", "rageframe2"],
-    "homepage": "http://www.rageframe.com/",
+    "homepage": "http://www.ba.hgame.com/",
     "type": "project",
     "license": "Apache-2.0",
-    "support": {
-        "issues": "https://github.com/jianyan74/rageframe2?state=open",
-        "wiki": "https://github.com/jianyan74/rageframe2/blob/master/docs/guide-zh-CN/README.md",
-        "source": "https://github.com/jianyan74/rageframe2"
-    },
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.1.0",

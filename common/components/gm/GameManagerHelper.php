@@ -35,7 +35,7 @@ class GameManagerHelper extends  Component
 
     public static function getUserMailInfo($serverID,$page,$limit)
     {
-        $offset = $page * $limit;
+        $offset = ($page-1) * ($limit);
         $sql ="SELECT id,userId,type,sender,title,content,status,expireAt,redeemedAt,deletedAt,priority
               FROM mail 
               WHERE '1=1'

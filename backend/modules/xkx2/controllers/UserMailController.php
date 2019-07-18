@@ -18,7 +18,7 @@ class UserMailController extends XBaseController
             'allModels' => $data,
             'totalCount' => isset($count) ? $count : 0,
             'pagination' => [
-            'pageSize' => 20,
+            'pageSize' => 10,
             ],
         ]);
 
