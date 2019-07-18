@@ -9,6 +9,7 @@ namespace common\enums;
 
 class ServerInfoEnum
 {
+    const LOSE = -1;
     const ZERO = 0;
     const ONE = 1;
     const TWO = 2; 
@@ -17,6 +18,7 @@ class ServerInfoEnum
     
 
     public static $listExplain = [
+        self::LOSE => '',
         self::ZERO => '',
         self::ONE => '',
         self::TWO => '',

@@ -2,6 +2,9 @@
 
 use common\helpers\Html;
 use kartik\grid\GridView;
+use yii\bootstrap\ButtonDropdown;
+
+use common\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -9,9 +12,27 @@ use kartik\grid\GridView;
 $this->title = '用户邮件管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php 
+$item =[];
+foreach ($area as $k =>$v){
+    $res = ['label' => $v, 'url' => Url::toRoute(['user-mail/index', 'e' => $k])];
+    array_push($item,$res);
+}
+
+?>
+<?= ButtonDropdown::widget([
+  'label' => $area[$serverID],
+  'options' =>['style' => 'width:100px;'],
+  'dropdown' => [
+      'items' => $item,
+
+  ],
+  
+]);
+?>
+
 
 <form action="index" method="get">
-
     <div class="form-group">
             <div class="col-sm-2">
                 <input class="form-control" id="query[userId]" name="query[userId]" type="text" placeholder="用户ID"/>
@@ -24,6 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <input  type="submit" class="btn btn-primary btn-sm" value="搜索">
     </div>
 </form>
+
+
+
+ 
+
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -87,8 +113,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ['label' => '优先级',
             'attribute' => 'priority',
         ],
-
-        //'serverId:ntext',
 
         [
             'class' => 'yii\grid\ActionColumn',

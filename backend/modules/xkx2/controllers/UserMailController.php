@@ -9,9 +9,7 @@ use Yii;
 
 class UserMailController extends XBaseController
 {
-    use Curd;
-    public $modelClass = 'common\models\hgame\xkx2wxdb\ServerInfo';
-
+    
     public function actionIndex()
     {
         $where = "1=1";
@@ -33,8 +31,10 @@ class UserMailController extends XBaseController
         ]);
 
         return $this->render('index', [
+            'area' => $this->serversInfo,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'serverID' =>$this->serverId,
         ]);
 
     }

@@ -20,9 +20,9 @@ class StatusEnum
      * @var array
      */
     public static $listExplain = [
-        self::ENABLED => '发送中',
-        self::DISABLED => '未发送',
-        self::DELETE => '已删除',
-        self::FINISHED => '已发送'
+        self::ENABLED => '',
+        self::DISABLED => '',
+        self::DELETE => '',
+        self::FINISHED => ''
     ];
 }

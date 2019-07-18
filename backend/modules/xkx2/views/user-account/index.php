@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '侠客行OL微信';
+$this->title = '账号管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'tableOptions' => ['class' => 'table table-hover'],
         'columns' => [
             [
@@ -33,27 +34,42 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             'id',
-            [
-                'attribute' => 'type',
-                'value' => function ($model) {
-                    return  Html::etype($model['type']); 
-                },
-                'filter' => false,
-                'format' => 'raw',
-            ],
-            
-            'sendTime',
-            'expireAt',
-            'title',
+            'openId',
+            'channelId',
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                    return  Html::wxstatus($model['status']); 
+                    return  Html::userInfoStatus($model['status']); 
                 },
-                'filter' => false,
+                'filter' => Html::activeDropDownList($searchModel, 'status',
+                    ['0' => '正常', '1' => '普通封号', '2' => '平台封号'], [
+                        'prompt' => '全部',
+                        'class' => 'form-control',
+                    ]),
+                'headerOptions'=> ['width'=> '100'],
                 'format' => 'raw',
             ],
-            //'serverId:ntext',
+            
+            [
+                'attribute' => 'createTime',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'lastLoginTime',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'bendExpireAt',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'lastLoginServerId',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'loginCount',
+                'filter' => false,
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -63,9 +79,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'edit' => function($url, $model, $key){
                         return Html::edit(['edit', 'id' => $model->id]);
                 },
-            //    'status' => function($url, $model, $key){
-            //             return Html::status($model['status']);
-            //       },
                 'delete' => function($url, $model, $key){
                         return Html::delete(['delete', 'id' => $model->id]);
                 },

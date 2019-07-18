@@ -4,6 +4,7 @@ namespace backend\modules\xkx2\controllers;
 use backend\controllers\BaseController;
 use Yii;
 use common\components\gm\GameManagerHelper;
+use common\helpers\ArrayHelper;
 
 class XBaseController extends BaseController
 {
@@ -30,7 +31,8 @@ class XBaseController extends BaseController
 
         $serversInfoAll = GameManagerHelper::loadServers('',-1);
 
-        $this->serversInfo = array_slice($serversInfoAll, 0);
+         $serverInfoArr = array_slice($serversInfoAll, 0);
+         $this->serversInfo  = ArrayHelper::map($serverInfoArr, 'code', 'name');
        
         if(empty($this->serverId)){
             $this->serverId = $this->serversInfo[0]['code'];

@@ -91,6 +91,20 @@ class Html extends BaseHtml
     public static function status($status = 1)
     {
         $listBut = [
+            StatusEnum::DISABLED => self::tag('span', '禁用', [
+                'class' => "btn btn-success btn-sm", 
+            ]),
+            StatusEnum::ENABLED => self::tag('span', '启用', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+        ];
+
+        return $listBut[$status] ?? '';
+    }
+
+    public static function wxstatus($status = 1)
+    {
+        $listBut = [
             StatusEnum::DISABLED => self::tag('span', '未发送', [
                 'class' => "btn btn-success btn-sm", 
             ]),
@@ -108,6 +122,8 @@ class Html extends BaseHtml
         return $listBut[$status] ?? '';
     }
 
+    
+
     /**
      * 邮件状态标签
      *
@@ -117,10 +133,10 @@ class Html extends BaseHtml
     public static function etype($status=0)
     {
         $listBut = [
-            EtypeEnum::DISABLED => self::tag('span', '全部', [
+            ServerInfoEnum::ZERO => self::tag('span', '全部', [
                 'class' => "btn btn-default btn-sm",
             ]),
-            EtypeEnum::ENABLED => self::tag('span', '后台人工', [
+            ServerInfoEnum::LOSE => self::tag('span', '后台人工', [
                 'class' => "btn btn-default btn-sm",
             ]),
         ];
@@ -135,30 +151,52 @@ class Html extends BaseHtml
     public static function noticetype($status=0)
     {
         $listBut = [
-            NoticeEnum::ZERO => self::tag('span', '未发送', [
+            ServerInfoEnum::ZERO => self::tag('span', '未发送', [
                 'class' => "btn btn-default btn-sm",
             ]),
-            NoticeEnum::SUCCESS => self::tag('span', '发送成功', [
+            ServerInfoEnum::ONE => self::tag('span', '发送成功', [
                 'class' => "btn btn-success btn-sm",
             ]),
-            NoticeEnum::ERROR => self::tag('span', '发送失败', [
+            ServerInfoEnum::TWO => self::tag('span', '发送失败', [
                 'class' => "btn btn-danger btn-sm",
             ]),
         ];
         return $listBut[$status] ?? '';
     } 
 
+
+    /**
+     * 账号管理
+     */
+    public static function userInfoStatus($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '正常', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '普通封号', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::TWO => self::tag('span', '设备封号', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+        ];
+        return $listBut[$status] ?? '';
+
+    }
+
     public static function ServerInfostatus($status=0)
     {
         $listBut = [
-            ServerInfoEnum::THREE => self::tag('span', '爆满', [
-                'class' => "btn btn-default btn-sm",
-            ]),
+            
             ServerInfoEnum::ONE => self::tag('span', '良好', [
                 'class' => "btn btn-success btn-sm",
             ]),
             ServerInfoEnum::TWO => self::tag('span', '正常', [
                 'class' => "btn btn-danger btn-sm",
+            ]),
+            ServerInfoEnum::THREE => self::tag('span', '爆满', [
+                'class' => "btn btn-default btn-sm",
             ]),
             ServerInfoEnum::FOUR => self::tag('span', '备服', [
                 'class' => "btn btn-danger btn-sm",
