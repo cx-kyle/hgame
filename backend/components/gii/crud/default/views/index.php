@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5><?= "<?= " ?>Html::encode($this->title) ?></h5>
+                    <h3><?= "<?= " ?>Html::encode($this->title) ?></h3>
                     <div class="ibox-tools">
                         <?= "<?= " ?>Html::create(['edit']) ?>
                     </div>
@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if ($generator->indexWidgetType === 'grid'): ?>
     <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'tableOptions' => ['class' => 'table table-hover'],
         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
             [
