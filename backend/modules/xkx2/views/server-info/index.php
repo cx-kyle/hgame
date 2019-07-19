@@ -95,19 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
 
             ],
-            //   'filter' => DateRangePicker::widget([
-            //     'name' => 'openTime',
-            //     'value' =>function ($searchModel) {
-            //         return $searchModel['openTime'];
-            //       },
-            //     'convertFormat' => true,
-            //     'pluginOptions' => [
-            //         'locale' => [
-            //             'format' => 'Y-m-d',
-            //             'separator' => '/',
-            //         ]
-            //     ]
-            // ]),
+
         ],
         [
             'attribute' => 'crossGroup',

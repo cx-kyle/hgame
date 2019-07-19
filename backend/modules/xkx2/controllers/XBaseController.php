@@ -9,7 +9,7 @@ use common\helpers\ArrayHelper;
 class XBaseController extends BaseController
 {
 
-    public $serverId = 0;  // 服务器ID
+    public $serverId = 1;  // 服务器ID
 
     public $serversInfo = [];
 
@@ -19,7 +19,7 @@ class XBaseController extends BaseController
     public function init()
     {
         
-        $this->serverId = intval(Yii::$app->request->getQueryParam('e', 0));
+        $this->serverId = intval(Yii::$app->request->getQueryParam('e', 1));
         $this->page = intval(Yii::$app->request->getQueryParam('page', 1));
         $this->limit = intval(Yii::$app->request->getQueryParam('limit', 10));
         if($this->serverId == 0 && isset($_SESSION["serverId"]) ){

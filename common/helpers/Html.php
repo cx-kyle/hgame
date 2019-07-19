@@ -164,6 +164,44 @@ class Html extends BaseHtml
         return $listBut[$status] ?? '';
     } 
 
+    /**
+     * 订单状态
+     */
+
+    public static function OrderStatus($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '未支付', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '充值金额', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+            ServerInfoEnum::TWO => self::tag('span', '支付成功道具未到账', [
+                'class' => "btn btn-danger btn-sm",
+            ]),
+            ServerInfoEnum::THREE => self::tag('span', '订单完成', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+        ];
+        return $listBut[$status] ?? '';
+    } 
+
+    /** 是否游客 */
+
+    public static function IsGuest($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '非游客', [
+                'class' => "btn btn-success btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '游客', [
+                'class' => "btn btn- default btn-sm",
+            ]),
+           
+        ];
+        return $listBut[$status] ?? '';
+    }
 
     /**
      * 账号管理
