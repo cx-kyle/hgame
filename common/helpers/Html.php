@@ -223,6 +223,44 @@ class Html extends BaseHtml
 
     }
 
+    /** 增减类型 */
+
+    public static function AddOrReduce($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::ZERO => self::tag('span', '增加', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::ONE => self::tag('span', '减少', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+           
+        ];
+        return $listBut[$status] ?? '';
+
+    }
+
+    /** 货币类型 */
+    public static function iMoneyType($status=0)
+    {
+        $listBut = [
+            ServerInfoEnum::SIXTEEN => self::tag('span', '金币', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::SEVENTEEN => self::tag('span', '钻石', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+            ServerInfoEnum::TWENTYTWO => self::tag('span', '元宝', [
+                'class' => "btn btn-default btn-sm",
+            ]),
+           
+           
+        ];
+        return $listBut[$status] ?? '';
+
+    }
+
+
     public static function ServerInfostatus($status=0)
     {
         $listBut = [

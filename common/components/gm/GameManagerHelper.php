@@ -32,8 +32,9 @@ class GameManagerHelper extends  Component
         return $connection;
     }
 
+    /** 获取单服用户邮件 */
 
-    public static function getUserMailInfo($serverID,$page,$limit,$where)
+    public static function getUserMailInfo($serverID,$page,$limit,$where,$dsnInfo)
     {
         $offset = ($page-1) * ($limit);
         $sql ="SELECT id,userId,type,sender,title,content,status,expireAt,redeemedAt,deletedAt,priority
@@ -44,30 +45,125 @@ class GameManagerHelper extends  Component
               offset $offset
               ";
 
-        $command = self::getDbConnectionByServerId($serverID)->createCommand($sql);
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
         $result = $command->queryAll();
         return $result;
     }
 
-    /**
-     * 获取总数
-     */
+    /** 获取单服用户邮件总数 */
 
-    public static function getUserMailCount($serverID,$where)
+    public static function getUserMailCount($serverID,$where,$dsnInfo)
     {
         
         $sql ="SELECT COUNT(*) FROM mail where $where";
 
-        $command = self::getDbConnectionByServerId($serverID)->createCommand($sql);
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
+        $result = $command->queryScalar();
+        return $result;
+    }
+
+
+    /** 获取单服用户 玩家详情 */
+
+    public static function getUserInfo($serverID,$page,$limit,$where,$dsnInfo)
+    {
+        $offset = ($page-1) * ($limit);
+        $sql ="SELECT id,nickName,openId,mi,rechargeAll,vip,vipScore,lvl,combat,guildId,offlineTime,diamond
+              FROM user 
+              WHERE $where
+              order by id desc
+              limit $limit
+              offset $offset
+              ";
+
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
+        $result = $command->queryAll();
+        return $result;
+    }
+
+    /** 获取单服用户 玩家详情总数 */
+
+    public static function getUserInfoCount($serverID,$where,$dsnInfo)
+    {
+        
+        $sql ="SELECT COUNT(*) FROM user where $where";
+
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
+        $result = $command->queryScalar();
+        return $result;
+    }
+
+
+    /** 获取单服用户 货币消耗 */
+
+    public static function getUserMoneyLog($serverID,$page,$limit,$where,$dsnInfo)
+    {
+        $offset = ($page-1) * ($limit);
+        $sql ="SELECT UserId, iMoneyType, iMoney, AfterMoney, Reason, AddOrReduce, dtEventTime
+              FROM log_money_flow 
+              WHERE $where
+              order by dtEventTime desc
+              limit $limit
+              offset $offset
+              ";
+
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
+        $result = $command->queryAll();
+        return $result;
+    }
+
+    /** 获取单服用户 货币消耗总数 */
+
+    public static function getUserMoneyLogCount($serverID,$where,$dsnInfo)
+    {
+        
+        $sql ="SELECT COUNT(*) FROM log_money_flow where $where";
+
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
+        $result = $command->queryScalar();
+        return $result;
+    }
+
+
+    /** 获取单服用户 消耗查询 */
+
+    public static function getRemoveFlowLog($serverID,$page,$limit,$where,$dsnInfo)
+    {
+        $offset = ($page-1) * ($limit);
+        $sql ="SELECT id, UserId, eventTime, consumItem,vip, consumDiamondNo, consumMiNo, consumGuildMoneyNo, diamondNo, miNo, guildMoneyNo
+              FROM log_remove_flow 
+              WHERE $where
+              order by id desc
+              limit $limit
+              offset $offset
+              ";
+
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
+        $result = $command->queryAll();
+        return $result;
+    }
+
+    /** 获取单服用户 消耗查询总数 */
+
+    public static function getRemoveFlowLogCount($serverID,$where,$dsnInfo)
+    {
+        
+        $sql ="SELECT COUNT(*) FROM log_remove_flow where $where";
+
+        $command = self::getDbConnectionByServerId($serverID,$dsnInfo)->createCommand($sql);
         $result = $command->queryScalar();
         return $result;
     }
 
 
 
-    public static function getDbConnectionByServerId($serverId)
+
+
+
+    public static function getDbConnectionByServerId($serverId,$dsnInfo)
     {
         list($uid, $pwd, $dsn, ) = self::getServerYiiInfo($serverId);
+        $dsn = str_replace("_server_game_", $dsnInfo, $dsn);
         return self::getDbConnection($dsn, $uid, $pwd);
     }
 
@@ -126,7 +222,7 @@ class GameManagerHelper extends  Component
 
     public static function getDbConnection($dsn, $uid, $pwd)
     {
-        log('dynamic dsn:'.$dsn.', uid:'.$uid.', pwd:'.$pwd, 'info', 'GmDataSource');
+
         $connection = new \yii\db\Connection([
             'dsn' => $dsn,
             'username' => $uid,

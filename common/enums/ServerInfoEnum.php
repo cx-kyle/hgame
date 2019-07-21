@@ -15,6 +15,9 @@ class ServerInfoEnum
     const TWO = 2; 
     const THREE = 3; 
     const FOUR = 4;
+    const SIXTEEN = 16;
+    const SEVENTEEN = 17;
+    const TWENTYTWO =22;
     
 
     public static $listExplain = [
@@ -24,5 +27,9 @@ class ServerInfoEnum
         self::TWO => '',
         self::THREE => '',
         self::FOUR => '',
+        self::SIXTEEN => '',
+        self::SEVENTEEN => '',
+        self::TWENTYTWO => '',
+        
     ];
 }

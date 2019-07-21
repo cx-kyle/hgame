@@ -7,8 +7,9 @@ use common\components\Curd;
 use common\components\gm\GameManagerHelper;
 use Yii;
 
-class UserMailController extends XBaseController
+class SingleUserController extends XBaseController
 {
+    
     public $dsnInfo = '_server_game_'; 
 
     public function actionIndex()
@@ -19,8 +20,8 @@ class UserMailController extends XBaseController
             $where .= $this->search($search); 
         }
         
-        $data = GameManagerHelper::getUserMailInfo($this->serverId, $this->page, $this->limit,$where,$this->dsnInfo);
-        $count = GameManagerHelper::getUserMailCount($this->serverId,$where,$this->dsnInfo);
+        $data = GameManagerHelper::getUserInfo($this->serverId, $this->page, $this->limit,$where,$this->dsnInfo);
+        $count = GameManagerHelper::getUserInfoCount($this->serverId,$where,$this->dsnInfo);
 
         $searchModel = [];
         $dataProvider = new ArrayDataProvider([
@@ -58,16 +59,13 @@ class UserMailController extends XBaseController
     protected function Search($params)
     {
         $query = '';
-        $data = Yii::$app->params['xkx2wx_usermail'];
+        $data = Yii::$app->params['xkx2wx_singleuser'];
+    
         foreach ($params as $key => $attributes) {
             foreach($attributes as $name => $value){
                 if(!empty($value)){
-                    if(in_array($name,$data)){
-                        if (intval($value)> 0){
-                            $query .=  " and ".$name." = " .$value;
-                        }else{
-                            $query .= " and ".$name." like  '%" . $value . "%'";
-                        }
+                    if(in_array($name,$data)){  
+                            $query .=  " and " . $name." = '$value' ";
                         
                     }
                 }
