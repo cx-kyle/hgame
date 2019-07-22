@@ -54,6 +54,7 @@ class MailTask extends \yii\db\ActiveRecord
             [['content', 'userId', 'extCondition', 'excelItems', 'items', 'serverId'], 'string'],
             [['title'], 'string', 'max' => 50],
             [['sender'], 'string', 'max' => 255],
+            ['etype', 'default', 'value' => 0],
         ];
     }
 

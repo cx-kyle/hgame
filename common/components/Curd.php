@@ -8,6 +8,7 @@ use common\helpers\ResultDataHelper;
 use common\enums\StatusEnum;
 use common\helpers\ArrayHelper;
 
+use common\helpers\ExcelHelper;
 /**
  * Trait Curd
  * @property \yii\db\ActiveRecord|\yii\base\Model $modelClass
@@ -59,6 +60,17 @@ trait Curd
         $id = Yii::$app->request->get('id', null);
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            try {
+                $file = $_FILES['excelFile'];
+                $data = ExcelHelper::getMailUsers($file['tmp_name'], 2);
+                // \common\helpers\RfImportHelper::auth($data);
+            } catch (\Exception $e) {
+                p($e);
+                return $e;
+            }
+
+            p($data);die();
             return $this->redirect(['index']);
         }
 
@@ -66,6 +78,20 @@ trait Curd
             'model' => $model,
         ]);
     }
+
+    /**
+     * 查看
+     */
+
+     public function actionView()
+     {
+        $id = Yii::$app->request->get('id', null);
+        $model = $this->findModel($id);
+        return $this->render($this->action->id, [
+            'model' => $model,
+        ]);
+     }
+
 
     /**
      * 伪删除

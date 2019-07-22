@@ -303,4 +303,71 @@ class ExcelHelper
 
         return is_array($row) ? false : $row;
     }
+
+    /**
+     *  获取游戏用户excel道具数据
+     */
+    public static function getMailUsers($filePath,$startRow = 1)
+    {
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $reader->setReadDataOnly(true);
+        if (!$reader->canRead($filePath)) {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            // setReadDataOnly Set read data only 只读单元格的数据，不格式化 e.g. 读时间会变成一个数据等
+            $reader->setReadDataOnly(true);
+
+            if (!$reader->canRead($filePath)) {
+                throw new Exception('不能读取Excel');
+            }
+        }
+
+        $spreadsheet = $reader->load($filePath);
+        $sheetCount = $spreadsheet->getSheetCount();// 获取sheet的数量
+
+        // 获取所有的sheet表格数据
+        $excleDatas = [];
+        $emptyRowNum = 0;
+        
+            $currentSheet = $spreadsheet->getSheet(0); // 读取excel文件中的第一个工作表
+            $allColumn = $currentSheet->getHighestColumn(); // 取得最大的列号
+            $allColumn = Coordinate::columnIndexFromString($allColumn); // 由列名转为列数('AB'->28)
+            $allRow = $currentSheet->getHighestRow(); // 取得一共有多少行
+
+            $arr = [];
+            for ($currentRow = $startRow; $currentRow <= $allRow; $currentRow++) {
+                $row = array();
+               
+                $serverId = trim($currentSheet->getCell("A".$currentRow)->getValue());
+                if (!$serverId) {
+                    continue;
+                }
+                $row['serverId'] = $serverId;
+                $userId = trim($currentSheet->getCell("B".$currentRow)->getValue());
+                $row['userId'] = $userId;
+                if (!$userId) {
+                    continue;
+                }
+                $userName = trim($currentSheet->getCell("C".$currentRow)->getValue());
+                $row['userName'] = $userName;
+                // for($column = 'D'; $column <= $allColumn; $column++){
+                //     $item= trim($currentSheet->getCell($column.$currentRow)->getValue());
+                //     $row['items'][] = $item;
+                // }
+                if ($row) {
+                    $row['items'] = array_filter($row['items']);
+                    $arr[] = $row;
+                }
+            }
+            
+
+            $excleDatas[0] = $arr; // 多个sheet的数组的集合
+        
+
+        // 这里我只需要用到第一个sheet的数据，所以只返回了第一个sheet的数据
+        $returnData = $excleDatas ? array_shift($excleDatas) : [];
+
+        // 第一行数据就是空的，为了保留其原始数据，第一行数据就不做array_fiter操作；
+        $returnData = $returnData && isset($returnData[$startRow]) && !empty($returnData[$startRow]) ? array_filter($returnData) : $returnData;
+        return $returnData;
+    }
 }
