@@ -48,7 +48,6 @@ class Xkx2WxController extends BaseController
     {
         $id = Yii::$app->request->get('id', null);
         $model = $this->findModel($id);
-
         $serversInfoAll = GameManagerHelper::loadServers('',-1);
 
         $serverInfoArr = array_slice($serversInfoAll, 0);
@@ -56,11 +55,10 @@ class Xkx2WxController extends BaseController
         $item = ArrayHelper::map($serverInfoArr, 'code', 'name');
        
         if ($model->load(Yii::$app->request->post()) ) {
-
             try {
                 $file = $_FILES['excelFile'];
                 $data = ExcelHelper::getMailUsers($file['tmp_name'], 2);
-                // \common\helpers\RfImportHelper::auth($data);
+               
             } catch (\Exception $e) {
                 return $this->message($e->getMessage(), $this->redirect(['index']), 'error');
             }
@@ -68,13 +66,10 @@ class Xkx2WxController extends BaseController
                 $model['excelItems'] = json_encode($data);
             }
 
-
             if(count($model['serverId']) > 0) {
-                $model['serverId'] = vsprintf("[%s]", $model['serverId']);
-               
+                $model['serverId'] = vsprintf("[%s]", join(',', $model['serverId']));
             }
-            
-            
+           
             if ($model->save()) {
                 return $this->redirect(['index']);
             }
@@ -86,4 +81,5 @@ class Xkx2WxController extends BaseController
             'model' => $model,
         ]);
     }
+
 }

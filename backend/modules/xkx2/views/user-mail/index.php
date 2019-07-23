@@ -117,15 +117,12 @@ foreach ($area as $k =>$v){
         [
             'class' => 'yii\grid\ActionColumn',
             'header' => '操作',
-            'template' => '{edit} {status} {delete}',
+            'template' => '{edit}',
             'buttons' => [
                 'edit' => function ($url, $model, $key) {
-                    return Html::edit(['edit', 'id' => $model->id]);
+                    return Html::edit(['edit', 'id' => $model['id']]);
                 },
 
-                'delete' => function ($url, $model, $key) {
-                    return Html::delete(['delete', 'id' => $model->id]);
-                },
             ],
         ],
     ],

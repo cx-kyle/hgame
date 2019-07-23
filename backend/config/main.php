@@ -23,14 +23,6 @@ return [
             'class' => 'backend\modules\sys\Module',
         ],
         
-        /** ------ 会员模块 ------ **/
-        'member' => [
-            'class' => 'backend\modules\member\Module',
-        ],
-        /** ------ oauth2 ------ **/
-        'oauth2' => [
-            'class' => 'backend\modules\oauth2\Module',
-        ],
 
         /** ------- 基础模块 ----- */
         'xkx2' => [

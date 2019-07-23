@@ -61,20 +61,7 @@ trait Curd
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            try {
-                $file = $_FILES['excelFile'];
-                $data = ExcelHelper::getMailUsers($file['tmp_name'], 2);
-                // \common\helpers\RfImportHelper::auth($data);
-            } catch (\Exception $e) {
-                p($e);
-                return $e;
-            }
-
-            p($data);die();
-
-            if ($model->save()) {
             return $this->redirect(['index']);
-        }
 
         }
 

@@ -88,9 +88,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'userId')->textarea(['rows' => 2]) ?>
                     <?= $form->field($model, 'items')->textarea(['rows' => 3]) ?>
-   
-                    <?= $form->field($model, 'serverId')->textarea(['rows' => 3
-                        ]) ?>
 
                     <?= $form->field($model, 'serverId')->checkboxList($item) ?>
 

@@ -42,10 +42,17 @@ class UserMailController extends XBaseController
 
     public function actionEdit()
     {
+        $where = "1=1";
         $id = Yii::$app->request->get('id', null);
-
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $search = Yii::$app->request->queryParams;
+        if (!empty($search)) {
+            $where .= $this->findModel($search); 
+        }
+    
+        $data = GameManagerHelper::getUserMail($this->serverId,$where,$this->dsnInfo);
+       
+        //$model = $this->findModel($id);
+        if ((Yii::$app->request->post())) {
             return $this->redirect(['index']);
         }
 
@@ -62,18 +69,32 @@ class UserMailController extends XBaseController
         foreach ($params as $key => $attributes) {
             foreach($attributes as $name => $value){
                 if(!empty($value)){
-                    if(in_array($name,$data)){
-                        if (intval($value)> 0){
-                            $query .=  " and ".$name." = " .$value;
-                        }else{
-                            $query .= " and ".$name." like  '%" . $value . "%'";
-                        }
-                        
-                    }
+                    if(in_array($name,$data)){  
+                        $query .=  " and " . $name." = '$value' ";
+                    
+                }
                 }
                
             }
         }
         return $query;
     }
+
+    protected function findModel($params)
+    {
+        $query = '';
+        $data = Yii::$app->params['xkx2wx_usermail'];
+        foreach ($params as $key => $attributes) {
+                if(!empty($attributes)){
+                    if(in_array($key,$data)){  
+                        $query .=  " and " . $key." = '$attributes' ";
+                    
+                }
+               
+            }
+        }
+        return $query;
+    }
+
+
 }

@@ -32,6 +32,21 @@ class GameManagerHelper extends  Component
         return $connection;
     }
 
+    /** 更新或增加单个用户邮件 */
+    public static function getUserMail($serverID,$where,$dsnInfo)
+    {
+        $sql ="SELECT id,userId,type,sender,title,content,status,expireAt,redeemedAt,deletedAt,priority
+              FROM mail 
+              WHERE $where
+              order by id desc
+              ";
+         $command = self::getDbConnectionByServerId($serverID,$dsnInfo)
+         ->createCommand()
+         ->update('mail', ['status' => 1], 'id = 3755')->execute();;
+         //$result = $command->queryAll();
+         //return $result;
+    }
+
     /** 获取单服用户邮件 */
 
     public static function getUserMailInfo($serverID,$page,$limit,$where,$dsnInfo)

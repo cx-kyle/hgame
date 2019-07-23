@@ -46,6 +46,7 @@ class SingleUserController extends XBaseController
         $id = Yii::$app->request->get('id', null);
 
         $model = $this->findModel($id);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
@@ -73,5 +74,16 @@ class SingleUserController extends XBaseController
             }
         }
         return $query;
+    }
+
+
+    protected function findModel($id)
+    {
+        if (empty($id) || empty(($model = Curd::findOne($id)))) {
+            $model = new Curd;
+            return $model->loadDefaultValues();
+        }
+
+        return $model;
     }
 }
