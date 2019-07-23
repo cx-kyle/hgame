@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\xkx2\controllers;
+namespace backend\modules\xkx2_wx\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -67,7 +67,7 @@ class Xkx2WxController extends BaseController
             }
 
             if(count($model['serverId']) > 0) {
-                $model['serverId'] = vsprintf("[%s]", join(',', $model['serverId']));
+                $model['serverId'] = vsprintf("[%s]", array(join(",", $model['serverId'])));
             }
            
             if ($model->save()) {

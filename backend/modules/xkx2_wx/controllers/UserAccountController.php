@@ -1,28 +1,28 @@
 <?php
 
-namespace backend\modules\xkx2\controllers;
+namespace backend\modules\xkx2_wx\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
 use common\models\common\SearchModel;
-use common\models\hgame\xkx2wxdb\User;
+use common\models\hgame\xkx2wxdb\Account;
 use common\components\Curd;
 use backend\controllers\BaseController;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * UserAccountController implements the CRUD actions for Account model.
  */
-class UserController extends BaseController
+class UserAccountController extends BaseController
 {
     use Curd;
 
     /**
     * @var
     */
-    public $modelClass = 'common\models\hgame\xkx2wxdb\User';
+    public $modelClass = 'common\models\hgame\xkx2wxdb\Account';
 
     /**
-    * Lists all User models.
+    * Lists all Account models.
     * @return mixed
     */
     public function actionIndex()
@@ -30,19 +30,19 @@ class UserController extends BaseController
         $searchModel = new SearchModel([
             'model' => $this->modelClass,
             'scenario' => 'default',
-            'partialMatchAttributes' => ['nickname'], // 模糊查询
+            'partialMatchAttributes' => [], // 模糊查询
             'defaultOrder' => [
-                'userId' => SORT_DESC
+                'id' => SORT_DESC
             ],
             'pageSize' => $this->pageSize
         ]);
 
-        $dataProvider = $searchModel
-            ->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
+
     }
 }

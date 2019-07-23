@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\xkx2\controllers;
+namespace backend\modules\xkx2_wx\controllers;
 
 use backend\components\ArrayDataProvider;
 use common\components\Curd;

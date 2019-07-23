@@ -2,7 +2,7 @@
 return [
     'adminEmail' => 'admin@example.com',
     'adminAcronym' => 'Hgame',
-    'adminTitle' => 'Hgame2',
+    'adminTitle' => 'Hgame',
 
     /** ------ 总管理员配置 ------ **/
     'adminAccount' => 1,// 系统管理员账号id

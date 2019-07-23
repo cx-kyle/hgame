@@ -1,5 +1,5 @@
 <?php
-namespace backend\modules\xkx2\controllers;
+namespace backend\modules\xkx2_wx\controllers;
 
 use backend\controllers\BaseController;
 use Yii;

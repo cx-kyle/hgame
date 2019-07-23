@@ -1,28 +1,28 @@
 <?php
 
-namespace backend\modules\xkx2\controllers;
+namespace backend\modules\xkx2_wx\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
 use common\models\common\SearchModel;
-use common\models\hgame\xkx2wxdb\Account;
+use common\models\hgame\xkx2wxdb\ServerInfo;
 use common\components\Curd;
 use backend\controllers\BaseController;
 
 /**
- * UserAccountController implements the CRUD actions for Account model.
+ * ServerInfoController implements the CRUD actions for ServerInfo model.
  */
-class UserAccountController extends BaseController
+class ServerInfoController extends BaseController
 {
     use Curd;
 
     /**
     * @var
     */
-    public $modelClass = 'common\models\hgame\xkx2wxdb\Account';
+    public $modelClass = 'common\models\hgame\xkx2wxdb\ServerInfo';
 
     /**
-    * Lists all Account models.
+    * Lists all ServerInfo models.
     * @return mixed
     */
     public function actionIndex()
@@ -38,7 +38,6 @@ class UserAccountController extends BaseController
         ]);
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

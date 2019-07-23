@@ -23,10 +23,9 @@ return [
             'class' => 'backend\modules\sys\Module',
         ],
         
-
         /** ------- 基础模块 ----- */
-        'xkx2' => [
-            'class' => 'backend\modules\xkx2\Module',
+        'xkx2_wx' => [
+            'class' => 'backend\modules\xkx2_wx\Module',
         ],
         'gridview' =>  [
             'class' => '\kartik\grid\Module'

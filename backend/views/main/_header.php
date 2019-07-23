@@ -18,7 +18,7 @@ use backend\widgets\notify\Notify;
         <!-- Sidebar toggle button-->
         <div class="navbar-custom-menu pull-left">
             <ul class="nav navbar-nav">
-                <li class="dropdown notifications-menu rfTopMenu">
+                <li class="dropdown notifications-menu rfTopMenu hide rfTopMenuHover">
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                         <span class="sr-only">切换导航</span>
                         <span class="icon-bar"></span>

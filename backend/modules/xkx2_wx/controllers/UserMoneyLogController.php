@@ -1,15 +1,16 @@
 <?php
 
-namespace backend\modules\xkx2\controllers;
+namespace backend\modules\xkx2_wx\controllers;
 
 use backend\components\ArrayDataProvider;
 use common\components\Curd;
 use common\components\gm\GameManagerHelper;
 use Yii;
 
-class UserMailController extends XBaseController
+class UserMoneyLogController extends XBaseController
 {
-    public $dsnInfo = '_server_game_'; 
+    
+    public $dsnInfo = '_server_log_'; 
 
     public function actionIndex()
     {
@@ -19,8 +20,8 @@ class UserMailController extends XBaseController
             $where .= $this->search($search); 
         }
         
-        $data = GameManagerHelper::getUserMailInfo($this->serverId, $this->page, $this->limit,$where,$this->dsnInfo);
-        $count = GameManagerHelper::getUserMailCount($this->serverId,$where,$this->dsnInfo);
+        $data = GameManagerHelper::getUserMoneyLog($this->serverId, $this->page, $this->limit,$where,$this->dsnInfo);
+        $count = GameManagerHelper::getUserMoneyLogCount($this->serverId,$where,$this->dsnInfo);
 
         $searchModel = [];
         $dataProvider = new ArrayDataProvider([
@@ -42,17 +43,10 @@ class UserMailController extends XBaseController
 
     public function actionEdit()
     {
-        $where = "1=1";
         $id = Yii::$app->request->get('id', null);
-        $search = Yii::$app->request->queryParams;
-        if (!empty($search)) {
-            $where .= $this->findModel($search); 
-        }
-    
-        $data = GameManagerHelper::getUserMail($this->serverId,$where,$this->dsnInfo);
-       
-        //$model = $this->findModel($id);
-        if ((Yii::$app->request->post())) {
+
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
 
@@ -65,36 +59,19 @@ class UserMailController extends XBaseController
     protected function Search($params)
     {
         $query = '';
-        $data = Yii::$app->params['xkx2wx_usermail'];
+        $data = Yii::$app->params['xkx2wx_usermoneylog'];
+    
         foreach ($params as $key => $attributes) {
             foreach($attributes as $name => $value){
                 if(!empty($value)){
                     if(in_array($name,$data)){  
-                        $query .=  " and " . $name." = '$value' ";
-                    
-                }
-                }
-               
-            }
-        }
-        return $query;
-    }
-
-    protected function findModel($params)
-    {
-        $query = '';
-        $data = Yii::$app->params['xkx2wx_usermail'];
-        foreach ($params as $key => $attributes) {
-                if(!empty($attributes)){
-                    if(in_array($key,$data)){  
-                        $query .=  " and " . $key." = '$attributes' ";
-                    
+                            $query .=  " and " . $name." = '$value' ";
+                        
+                    }
                 }
                
             }
         }
         return $query;
     }
-
-
 }
