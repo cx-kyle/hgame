@@ -71,7 +71,11 @@ trait Curd
             }
 
             p($data);die();
+
+            if ($model->save()) {
             return $this->redirect(['index']);
+        }
+
         }
 
         return $this->render($this->action->id, [

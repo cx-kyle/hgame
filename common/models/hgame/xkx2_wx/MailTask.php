@@ -55,6 +55,7 @@ class MailTask extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 50],
             [['sender'], 'string', 'max' => 255],
             ['etype', 'default', 'value' => 0],
+            [['sender'], 'default', 'value' => '系统消息'],
         ];
     }
 
@@ -70,8 +71,8 @@ class MailTask extends \yii\db\ActiveRecord
             'expireAt' => '截止时间',
             'title' => '标题',
             'content' => '内容',
-            'userId' => 'User ID',
-            'extCondition' => 'Ext Condition',
+            'userId' => '用户ID',
+            'extCondition' => 'ExtCondition',
             'excelItems' => '导入excel',
             'items' => '具体发送的道具',
             'status' => '状态',

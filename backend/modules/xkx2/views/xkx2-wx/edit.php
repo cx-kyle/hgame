@@ -70,23 +70,31 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ]); ?>
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
-                    <?= $form->field($model, 'userId')->textarea(['rows' => 6]) ?>
-
-                    <div class="form-group">
+                    
+                    <div class="box-body">
+                <div class="form-group">
+                <div class="col-sm-2 text-right"><label class="control-label" for="mailtask-content">EXCEL用户导入</label></div>
                     <div class="input-group m-b">
-                        <input id="excel-file" type="file" name="excelFile" style="display:none">
+                        <input id="excel-file" type="file" name="excelFile" style="display:none">   
                         <input type="text" class="form-control" id="fileName" name="fileName" readonly>
                         <span class="input-group-btn">
                                 <a class="btn btn-white" onclick="$('#excel-file').click();">选择文件</a>
                             </span>
                     </div>
                 </div>
-                    <?= $form->field($model, 'extCondition')->textarea(['rows' => 6]) ?>
+            </div>
+                    
                     <?= $form->field($model, 'excelItems')->textarea(['rows' => 6]) ?>
-                    <?= $form->field($model, 'items')->textarea(['rows' => 6]) ?>
-                    <?= $form->field($model, 'sender')->textInput(['maxlength' => true]) ?>
+
+                    <?= $form->field($model, 'userId')->textarea(['rows' => 2]) ?>
+                    <?= $form->field($model, 'items')->textarea(['rows' => 3]) ?>
    
-                    <?= $form->field($model, 'serverId')->textarea(['rows' => 6]) ?>
+                    <?= $form->field($model, 'serverId')->textarea(['rows' => 3
+                        ]) ?>
+
+                    <?= $form->field($model, 'serverId')->checkboxList($item) ?>
+
+                        
                 </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-center">

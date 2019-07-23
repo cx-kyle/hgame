@@ -64,36 +64,7 @@ class Url extends BaseUrl
         return urldecode(Yii::$app->urlManagerFront->createAbsoluteUrl($url, $scheme));
     }
 
-    /**
-     * 生成微信链接
-     *
-     * @param array $url
-     * @param bool $scheme
-     * @return string
-     * @throws \yii\base\InvalidConfigException
-     */
-    public static function toWechat(array $url, $scheme = false)
-    {
-        $url = static::isMerchant($url);
-        Yii::$app->params['inAddon'] && $url = self::regroupUrl($url);
-
-        if (!Yii::$app->has('urlManagerWechat')) {
-            $domainName = Yii::getAlias('@wechatUrl');
-
-            Yii::$app->set('urlManagerWechat', [
-                'class' => 'yii\web\urlManager',
-                'hostInfo' => !empty($domainName) ? $domainName : Yii::$app->request->hostInfo . '/wechat',
-                'scriptUrl' => '', // 代替'baseUrl'
-                'enablePrettyUrl' => true,
-                'showScriptName' => true,
-                // 'suffix' => '.html',// 静态
-            ]);
-
-            unset($domainName);
-        }
-
-        return urldecode(Yii::$app->urlManagerWechat->createAbsoluteUrl($url, $scheme));
-    }
+    
 
     /**
      * 生成Api链接

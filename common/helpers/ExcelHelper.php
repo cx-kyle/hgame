@@ -330,7 +330,7 @@ class ExcelHelper
         
             $currentSheet = $spreadsheet->getSheet(0); // 读取excel文件中的第一个工作表
             $allColumn = $currentSheet->getHighestColumn(); // 取得最大的列号
-            $allColumn = Coordinate::columnIndexFromString($allColumn); // 由列名转为列数('AB'->28)
+            //$allColumn = Coordinate::columnIndexFromString($allColumn); // 由列名转为列数('AB'->28)
             $allRow = $currentSheet->getHighestRow(); // 取得一共有多少行
 
             $arr = [];
@@ -349,10 +349,10 @@ class ExcelHelper
                 }
                 $userName = trim($currentSheet->getCell("C".$currentRow)->getValue());
                 $row['userName'] = $userName;
-                // for($column = 'D'; $column <= $allColumn; $column++){
-                //     $item= trim($currentSheet->getCell($column.$currentRow)->getValue());
-                //     $row['items'][] = $item;
-                // }
+                for($column = 'D'; $column <= $allColumn; $column++){
+                    $item= trim($currentSheet->getCell($column.$currentRow)->getValue());
+                    $row['items'][] = $item;
+                }
                 if ($row) {
                     $row['items'] = array_filter($row['items']);
                     $arr[] = $row;
