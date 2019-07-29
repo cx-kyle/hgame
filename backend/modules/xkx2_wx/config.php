@@ -43,7 +43,7 @@ return $configs = [
             'username' => 'h5_cs',
             'password' => 'h5_cs73T2%#',
         ],
-
+        
         /** 侠客行h5pay */
         'h5pay' => [
             'class' => 'yii\db\Connection',
@@ -57,6 +57,13 @@ return $configs = [
             'dsn' => 'mysql:host=121.43.163.185;port=43321;dbname=h5_center',
             'username' => 'select',
             'password' => 'select123!@#HD',
+        ],
+        'activdb' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=yulong_account',
+            'username' => 'lx',
+            'password' => '123456',
+            'charset' => 'utf8',
         ],
         
     ],

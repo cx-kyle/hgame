@@ -28,14 +28,6 @@ class Module extends \yii\base\Module
             $config['components'][$k] = array_merge($components[$k], $component);
         }
 
-        $params = \Yii::$app->params;
-    
-        foreach( $config['params'] AS $k=> $param ){
-            if( isset($param) && isset($params[$k]) == false ) continue;
-            $config['params'][$k] = array_merge($params[$k], $param);
-        }
-        
-
         \Yii::configure(\Yii::$app, $config);
 
         

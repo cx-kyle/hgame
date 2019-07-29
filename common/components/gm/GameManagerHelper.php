@@ -187,7 +187,7 @@ class GameManagerHelper extends  Component
     {
 
             $serverInfo = self::getServer($serverId);
-            $rawLink = $serverInfo['dblink'];
+            $rawLink = $serverInfo['dbLink'];
         if (empty($rawLink)) {
             log($serverId, 'error', 'svipInput');
         }
@@ -203,7 +203,6 @@ class GameManagerHelper extends  Component
               order by id desc
               ";
         $command = self::getServiceDbName()->createCommand($sql);
-
         return $result = $command->queryOne();
     }
 
@@ -247,4 +246,51 @@ class GameManagerHelper extends  Component
         $connection->open();
         return $connection;
     }
+    public static function getDbConnectionBydbname($db)
+    {
+      
+       $sql = "SELECT id as code, concat(any_value(name),any_value(area)) as name, dbLink ,serverId
+         FROM server_info
+         where status <> 5 and status != 8
+         group by serverId 
+         order by id desc
+         ";
+       $dblink =$db->createCommand($sql)->queryAll();
+       return $dblink;
+    }
+     /**
+     * @uses  获取所有格式化的服务器参数
+     * @return string
+     */
+    public static function getAllServerInfo($db)
+    {
+        $serverInfo = self::getDbConnectionBydbname($db);
+        if ((!isset($serverInfo[0])) || empty($serverInfo[0]['dbLink'])) {
+            throw new CException("cannot get dbLink, please check you have been get related server info.");
+        }
+        $rawLinkList = array();
+        foreach ($serverInfo as $k => $s){
+            $serverInfo[$k]['dbLink'] = self::serverDataFormate($s);
+//             if (!empty($serverInfo[$k]['mergerName'])){
+//                 $serverInfo[$k]['name'] = $serverInfo[$k]['mergerName'];
+//             }
+        }
+
+        return $serverInfo;
+    }
+    /**
+     * @uses  获取所有服务器连接
+     * @return [CDbConnection]
+     */
+    public static function getDbConnectionAll($db)
+    {   
+        $list = self::getAllServerInfo($db);
+        foreach ($list as $k => $s){
+            $list[$k]['db'] = self::getDbConnection($s['dbLink'][2], $s['dbLink'][0], $s['dbLink'][1]);
+            unset($list[$k]['dbLink']);
+        }
+
+        return $list;
+    }
+
 }

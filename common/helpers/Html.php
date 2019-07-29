@@ -45,7 +45,7 @@ class Html extends BaseHtml
         $options = ArrayHelper::merge([
             'class' => 'btn btn-primary btn-sm',
         ], $options);
-
+           
         return self::a($content, $url, $options);
     }
 
@@ -65,7 +65,15 @@ class Html extends BaseHtml
 
         return self::a($content, $url, $options);
     }
-
+    public static function allservice(array $url, $content = '全服同步', $options = [])
+    {
+        $options = ArrayHelper::merge([
+            'class' => 'btn btn-success btn-sm',
+            'onclick' => "rfallService(this);return false;"
+        ], $options);
+                    
+        return self::a($content, $url, $options);
+    }
     /**
      * 普通按钮
      *

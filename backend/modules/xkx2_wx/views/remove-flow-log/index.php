@@ -108,7 +108,7 @@ foreach ($area as $k =>$v){
         ['label' => '消费元宝数量',
             'attribute' => 'consumMiNo',
             'value' => function ($model) {
-                return  Html::AddOrReduce($model['AddOrReduce']); 
+                return  Html::AddOrReduce($model['consumMiNo']); 
             },
             'format' => 'raw',
         ],
@@ -135,7 +135,7 @@ foreach ($area as $k =>$v){
             'template' => '{edit}',
             'buttons' => [
                 'edit' => function ($url, $model, $key) {
-                    return Html::edit(['edit', 'id' => $model->id]);
+                    return Html::edit(['edit', 'id' => $model['id']]);
                 },
             ],
         ],

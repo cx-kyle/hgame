@@ -35,7 +35,7 @@ class MainController extends BaseController
      */
     public function actionSystem()
     {
-        $modules =  Yii::$app->controller->module->modules['xkx2'];
+        $modules =  Yii::$app->controller->module->modules['xkx2_wx'];
         return $this->render($this->action->id, [
             'module' => $modules
         ]);

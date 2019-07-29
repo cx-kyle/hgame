@@ -118,7 +118,7 @@ foreach ($area as $k =>$v){
             'template' => '{edit}',
             'buttons' => [
                 'edit' => function ($url, $model, $key) {
-                    return Html::edit(['edit', 'id' => $model->id]);
+                    return Html::edit(['edit', 'id' => $model['id']]);
                 },
             ],
         ],
